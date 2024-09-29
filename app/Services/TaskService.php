@@ -26,4 +26,17 @@ class TaskService {
             return false;
         }
     }
+
+    public function all() {
+        $result = Task::all();
+        return $result;
+    }
+
+    public function update(int $id, $params) : bool {
+        $task = $this->model->find($id);
+        if ($task == null)
+            return false;
+        $task->update($params);
+        return true;
+    }
 }
