@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Task\CreateRequest;
+use App\Http\Requests\Api\Task\UpdateRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use App\Services\TaskService;
@@ -13,7 +14,8 @@ class TaskController extends Controller
 {
     protected $taskService;
 
-    public function __construct(TaskService $taskService){
+    public function __construct(TaskService $taskService)
+    {
         $this->taskService = $taskService;
     }
 
@@ -23,8 +25,9 @@ class TaskController extends Controller
     }
 
     public function store(CreateRequest $createRequest)
-    {  
+    {
         $request = $createRequest->validated();
+
         $result = $this->taskService->create($request);
 
         if ($result) {
@@ -40,5 +43,17 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         return new TaskResource($task);
+    }
+
+    public function update(Task $task, UpdateRequest $updateRequest)
+    {
+        $request = $updateRequest->validated();
+        $result = $this->taskService->update($task, $request);
+        if ($result) {
+            return response()->json(['msg' => 'Cap nhap thanh cong']);
+        }
+        return response()->json([
+            'msg' => 'Cap nhat loi'
+        ]);
     }
 }
