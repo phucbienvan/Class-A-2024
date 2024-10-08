@@ -1,5 +1,9 @@
 <?php
 
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\HomeController;
+>>>>>>> 7fbd055b94355a4e66eeaae25932488a9754a3f5
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+<<<<<<< HEAD
     return view('welcome');
+=======
+    // return response()->json(['message' => 'Hello Worldddd!']);
+>>>>>>> 7fbd055b94355a4e66eeaae25932488a9754a3f5
 });

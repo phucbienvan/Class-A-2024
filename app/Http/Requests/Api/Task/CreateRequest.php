@@ -21,6 +21,7 @@ class CreateRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+<<<<<<< HEAD
     public function rules():array
     {
         return [
@@ -33,6 +34,20 @@ class CreateRequest extends FormRequest
     {
         return[
             'name.require' =>'Hay nhap name'
+=======
+    public function rules()
+    {
+        return [
+            "name" => ['required', 'max:255'],
+            "description" => "required"
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'hãy nhập name'
+>>>>>>> 7fbd055b94355a4e66eeaae25932488a9754a3f5
         ];
     }
 }

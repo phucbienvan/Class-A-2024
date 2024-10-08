@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 
 namespace App\Services;
 
@@ -43,3 +44,33 @@ class TaskService{
     }
 
 }
+=======
+namespace App\Services;
+
+use App\Models\Task;
+use Illuminate\Support\Facades\Log;
+use Exception;
+use Illuminate\Support\Facades\DB;
+
+class TaskService {
+
+    protected $model;
+    public function __construct(Task $task)
+    {
+        $this->model = $task;
+    }
+
+    public function create($params)
+    {
+        try {
+            $params['status'] = 1;
+            
+            return $this->model->create($params);
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return false;
+        }
+    }
+}
+>>>>>>> 7fbd055b94355a4e66eeaae25932488a9754a3f5
