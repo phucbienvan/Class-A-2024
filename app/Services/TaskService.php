@@ -39,4 +39,12 @@ class TaskService {
         $task->update($params);
         return true;
     }
+
+    public function remove(int $id) {
+        $model = $this->model->find($id);
+        if ($model != NULL) {
+            $model->delete();
+        }
+        return $model;
+    }
 }

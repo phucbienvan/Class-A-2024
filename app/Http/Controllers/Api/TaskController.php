@@ -50,4 +50,11 @@ class TaskController extends Controller
         }
         return response(status: 200);
     }
+
+    public function delete(int $id) {
+        $deleted = $this->taskService->remove($id);
+        if ($deleted != NULL)
+            return response(status: 200);
+        return response(status: 404);
+    }
 }
