@@ -25,4 +25,5 @@ Route::group(attributes: ['prefix'=> 'tasks','as'=>'tasks.'], routes: function()
     Route::post('/', [TaskController::class,'store']);
     Route::get('/{task}', [TaskController::class,'show']);
     Route::put('/{task}', [TaskController::class,'update']);
+    Route::delete('/{task}', [TaskController::class, 'delete']);
 });

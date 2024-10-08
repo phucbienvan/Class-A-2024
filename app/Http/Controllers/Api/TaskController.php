@@ -52,14 +52,36 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
-    //BTVN function update
+    
+    //BTVN function update and delete
 
-    public function update(CreateRequest $createRequest, Task $task)
+    public function update(CreateRequest $createRequest, $idtask)
     {
+        $task = Task::find($idtask);
+
+        if ($task) {
         // Xác thực và lấy dữ liệu đã xác thực
         $request = $createRequest->validated();
-
         $task->update($request);
         return new TaskResource($task);
+        }
+
+        return response()->json([
+            'message' => 'Không tồn tại task này',
+        ]);
+    }
+
+    public function delete($idtask): JsonResource|JsonResponse
+    {
+    
+        $task = Task::find($idtask);
+        if ($task) {
+            $task->delete();
+            return response()->json(['message' => 'Đã xóa thành công']);
+        }
+        return response()->json([
+            'message' => 'Không tồn tại task này',
+        ]);
+
     }
 }
