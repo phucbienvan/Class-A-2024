@@ -19,5 +19,11 @@ Route::get('/', function () {
     // return response()->json(['message' => 'Hello Worldddd!']);
 });
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{product}', [ProductController::class, 'show']);
+// group product
+Route::group(['prefix'=>'products'], function() {
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/{product}', [ProductController::class, 'show']);
+    Route::get('/create', [ProductController::class, 'create']);
+    Route::post('/create', [ProductController::class, 'store'])->name('products.store');
+});
+
