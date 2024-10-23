@@ -21,4 +21,9 @@ class ProductService
     {
         return $this->product->create($params);
     }
+    
+    public function update($product, $params)
+    {
+        return $product->update($params);
+    }
 }

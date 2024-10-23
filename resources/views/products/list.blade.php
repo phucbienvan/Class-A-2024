@@ -1,4 +1,11 @@
 <h1>Products</h1>
+@if (Session::has('success'))
+    <p class="success-message">{{ Session::get('success') }}</p>
+@endif
+
+@if (Session::has('error'))
+    <p>{{ Session::get('error') }}</p>
+@endif
 
 <table class="product-table">
     <thead>
@@ -6,6 +13,7 @@
             <th class="product-header">Name</th>
             <th class="product-header">Description</th>
             <th class="product-header">Price</th>
+            <td class="product-header">Action</td>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +22,9 @@
                 <td class="product-cell">{{ $item->name }}</td>
                 <td class="product-cell">{{ $item->description }}</td>
                 <td class="product-cell">{{ $item->price }}</td>
+                <td class="product-cell">
+                    <a href="{{ route('products.edit', $item->id) }}">Update</a>
+                </td>
             </tr>
         @endforeach 
     </tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\Product\UpdateRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -42,4 +43,20 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
+    public function edit(Product $product)
+    {
+        return view('products.edit', ['product' => $product]);
+    }
+
+    public function update(UpdateRequest $updateRequest, Product $product)
+    {
+        $request = $updateRequest->validated();
+        $result = $this->productService->update($product, $request);
+
+        if ($result) {
+            return redirect()->route('products.index')->with('success','update success');
+        }
+
+        return redirect()->route('products.index')->with('error','update failed');
+    }
 }
