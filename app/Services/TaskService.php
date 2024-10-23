@@ -37,4 +37,9 @@ class TaskService {
             return false;
         }
     }
+
+    public function getList()
+    {
+        return $this->model->orderBy('id','desc');
+    }
 }

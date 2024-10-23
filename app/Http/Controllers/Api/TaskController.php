@@ -18,24 +18,25 @@ class TaskController extends Controller
         $this->taskService = $taskService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(['message' => 'Hello World!']);
+        $result = $this->taskService->getList();
+
+        return TaskResource::apiPaginate($result, $request);
     }
 
     public function store(CreateRequest $createRequest)
     {  
         $request = $createRequest->validated();
         $result = $this->taskService->create($request);
+        $result = false;
 
         if ($result) {
-            return response()->api_success('create success', $result);
+            // return response()->api_success('create success', $result);
+            return response()->api_success('created success', $result);
         }
 
-        return response()->json([
-            'message' => 'error'
-
-        ]);
+        return response()->api_error('create error');
     }
 
     public function show(Task $task)
