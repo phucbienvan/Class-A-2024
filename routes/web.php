@@ -22,8 +22,9 @@ Route::get('/', function () {
 // group product
 Route::group(['prefix'=>'products'], function() {
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/{product}', [ProductController::class, 'show']);
     Route::get('/create', [ProductController::class, 'create']);
     Route::post('/create', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/{product}', [ProductController::class, 'show']);
+    
 });
 
