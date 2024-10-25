@@ -19,8 +19,16 @@ Route::get('/', function () {
     // return response()->json(['message' => 'Hello Worldddd!']);
 });
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
-Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
-
-Route::get('/products/{product}', [ProductController::class, 'show']);
+// group product
+Route::group(['prefix' => 'products'], function () {
+    // get all products
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    // create product
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/create', [ProductController::class, 'store'])->name('products.store');
+    // edit product
+    Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
+    // get detail
+    Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
+});

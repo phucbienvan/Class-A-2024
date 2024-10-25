@@ -17,6 +17,11 @@ class ProductService
         return $this->product->where('price', '>', 50)->get();
     }
 
+    public function create($params)
+    {
+        return $this->product->create($params);
+    }
+    
     public function update($product, $params)
     {
         return $product->update($params);
