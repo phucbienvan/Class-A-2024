@@ -1,11 +1,6 @@
 <h1>Products</h1>
-@if (Session::has('success'))
-    <p class="success-message">{{ Session::get('success') }}</p>
-@endif
 
-@if (Session::has('error'))
-    <p>{{ Session::get('error') }}</p>
-@endif
+@include('components.alert')
 
 <table class="product-table">
     <thead>
@@ -18,18 +13,20 @@
     </thead>
     <tbody>
         @foreach ($items as $item)
-            <tr class="product-row">
-                <td class="product-cell">{{ $item->name }}</td>
-                <td class="product-cell">{{ $item->description }}</td>
-                <td class="product-cell">{{ $item->price }}</td>
-                <td class="product-cell">
-                    <a href="{{ route('products.edit', $item->id) }}">Update</a>
-                </td>
-            </tr>
-        @endforeach 
+        <tr class="product-row">
+            <td class="product-cell">{{ $item->name }}</td>
+            <td class="product-cell">{{ $item->description }}</td>
+            <td class="product-cell">{{ $item->price }}</td>
+            <td class="product-cell">
+                <a href="{{ route('products.edit', $item->id) }}">Update</a>
+                <a href="{{ route('products.show', $item->id) }}">Detail</a>
+            </td>
+        </tr>
+        @endforeach
     </tbody>
 </table>
 
+<a href="{{ route('products.create') }}">Create Product</a>
 
 <style>
     .product-table {
@@ -37,6 +34,7 @@
         border-collapse: collapse;
         margin-bottom: 20px;
     }
+
     .product-header {
         background-color: #f2f2f2;
         font-weight: bold;
@@ -44,11 +42,17 @@
         padding: 10px;
         border-bottom: 2px solid #ddd;
     }
+
     .product-row:nth-child(even) {
         background-color: #f9f9f9;
     }
+
     .product-cell {
         padding: 10px;
         border-bottom: 1px solid #ddd;
+    }
+
+    .product-cell a {
+        margin-right: 10px;
     }
 </style>

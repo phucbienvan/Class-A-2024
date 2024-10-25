@@ -20,13 +20,15 @@ Route::get('/', function () {
 });
 
 // group product
-Route::group(['prefix'=>'products'], function() {
+Route::group(['prefix' => 'products'], function () {
+    // get all products
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/create', [ProductController::class, 'create']);
+    // create product
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/create', [ProductController::class, 'store'])->name('products.store');
+    // edit product
     Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
-    Route::get('/{product}', [ProductController::class, 'show']);
-    
+    // get detail
+    Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
 });
-

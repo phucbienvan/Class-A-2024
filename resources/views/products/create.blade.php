@@ -3,58 +3,52 @@
 
 <form action="{{ route('products.store') }}" method="POST">
     @csrf
-    <table class="product-form">
-        <tr>
-            <td class="product-cell">
-                <label for="name">Name</label>
-            </td>
-            <td class="product-cell">
-                <input type="text" name="name" id="name">
-            </td>
-        </tr>
-        <tr>
-            <td class="product-cell">
-                <label for="description">Description</label>
-            </td>
-            <td class="product-cell">
-                <input type="text" name="description" id="description">
-            </td>
-        </tr>
-        <tr>
-            <td class="product-cell">
-                <label for="price">Price</label>
-            </td>
-            <td class="product-cell">
-                <input type="text" name="price" id="price">
-            </td>
-        </tr>
-        <tr>
-            <td class="product-cell">
-                <button type="submit">Create</button>
-            </td>
-            <td class="product-cell"></td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" required>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" required>
+    </div>
+    <div class="form-group">
+        <button type="submit">Create</button>
+    </div>
 </form>
 
 <style>
-    .product-form {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
     }
-    .product-header {
-        background-color: #f2f2f2;
-        font-weight: bold;
-        text-align: left;
-        padding: 10px;
-        border-bottom: 2px solid #ddd;
+
+    .form-group label {
+        flex: 0 0 150px;
+        /* Adjust the width of the label as needed */
+        margin-right: 10px;
     }
-    .product-row:nth-child(even) {
-        background-color: #f9f9f9;
+
+    .form-group input[type="text"],
+    .form-group input[type="number"] {
+        flex: 1;
+        padding: 8px;
+        box-sizing: border-box;
     }
-    .product-cell {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
+
+    .form-group button {
+        padding: 8px 26px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 10px auto;
+        display: block;
+        font-size: 16px;
     }
 </style>

@@ -30,19 +30,24 @@ class ProductController extends Controller
         return view('products.show', ['product' => $product]);
     }
 
-    // crete a new product using create blade
+    // crete a new product
     public function create()
     {
-        return view('welcome');
+        return view('products.create');
     }
 
     public function store(ProductCreateRequest $request)
     {
-        $this->productService->create($request->validated());
-        
-        return redirect()->route('products.index');
+        $result = $this->productService->create($request->validated());
+
+        if (!$result) {
+            return redirect()->route('products.index')->with('create-failed', 'Failed to create product');
+        }
+
+        return redirect()->route('products.index')->with('create-success', 'Product created successfully');
     }
 
+    // update product
     public function edit(Product $product)
     {
         return view('products.edit', ['product' => $product]);
@@ -54,9 +59,9 @@ class ProductController extends Controller
         $result = $this->productService->update($product, $request);
 
         if ($result) {
-            return redirect()->route('products.index')->with('success','update success');
+            return redirect()->route('products.index')->with('success', 'update success');
         }
 
-        return redirect()->route('products.index')->with('error','update failed');
+        return redirect()->route('products.index')->with('error', 'update failed');
     }
 }
