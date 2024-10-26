@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TaskResource extends BaseResource
+class BaseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -12,11 +12,9 @@ class TaskResource extends BaseResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request)
+    public static function apiPaginate($query, $request)
     {
-        return [
-            'name' => $this->name,
-            'description' => $this->description
-        ];
+        $pageSize = $request->page_size ?? 3;
+        return static::collection($query->paginate($pageSize)->appends($request->query()))->response()->getData();
     }
 }

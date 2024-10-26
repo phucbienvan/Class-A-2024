@@ -35,17 +35,18 @@ class TaskController extends Controller
 
         ]);
     }
-
+    
     public function show(Task $task)
     {
         return new TaskResource($task);
     }
 
-    public function update(CreateRequest $createRequest, $id){
+    public function update(CreateRequest $createRequest, Task $task){
         $request = $createRequest->validated();
-        $result = $this->taskService->update($request, $id);
+        $result = $this->taskService->update($request, $task);
         if($result)
-            return new TaskResource($result);
+            // return new TaskResource($result);
+            return response()->api_success('Updated success', $result);
         return response()->json([
             'message' => 'error'
         ]);
@@ -55,11 +56,11 @@ class TaskController extends Controller
         $this->taskService->delete($id);
     }
 
-    public function getAllTasks()
+    public function getAllTasks(Request $request)
     {
         $result = $this->taskService->getAll();
         if($result)
-            return TaskResource::collection($result);
+            return TaskResource::apiPaginate($result, $request);
         return response()->json([
             'message' => 'error'
         ]);

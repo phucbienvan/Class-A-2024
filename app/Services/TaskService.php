@@ -26,11 +26,13 @@ class TaskService {
             return false;
         }
     }
-    public function update($params, $id){
+    public function update($params, $task){
         try{
-            $task = $this->model::find($id);
-            if(!$task)
-                return false;
+            // $task = $this->model::find($id);
+            // if(!$task)
+            //     return false;
+            // $task->update($params);
+            // return $task;
             $task->update($params);
             return $task;
         }catch(Exception $ex){
@@ -51,6 +53,7 @@ class TaskService {
         }
     }
     public function getAll(){
-        return $this->model::all();
+        //return $this->model::all();
+        return $this->model->orderBy('id', 'desc');
     }
 }
