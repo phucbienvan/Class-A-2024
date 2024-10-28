@@ -29,6 +29,24 @@ class ProductController extends Controller
         return view('products.show', ['product' => $product]);
     }
 
+    public function create()
+    {
+        return view('products.create');
+    }
+    
+    public function store(CreateRequest $createRequest)   
+    {
+        $requests = $createRequest->validated();
+
+        $result = $this->productService->create($requests);
+
+        if ($result) {
+            return redirect()->route('products.index')->with('success','Create success');
+        }
+
+        return redirect()->route('products.index')->with('error','Create failed');
+    }
+
     public function edit(Product $product)
     {
         return view('products.edit', ['product' => $product]);

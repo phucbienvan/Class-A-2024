@@ -17,6 +17,17 @@ class ProductService
         return $this->product->where('price', '>', 50)->get();
     }
 
+    public function create($params)
+    {
+        try {
+            return $this->product->create($params);
+        } catch(Exception $exception) {
+            Log::error(message: $exception);
+
+            return false;
+        }
+    }
+
     public function update($product, $params)
     {
         return $product->update($params);
