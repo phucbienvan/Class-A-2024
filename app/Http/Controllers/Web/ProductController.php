@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\Product\CreateRequest;
 use App\Http\Requests\Web\Product\UpdateRequest;
 use App\Models\Product;
 use App\Services\ProductService;
@@ -40,9 +41,38 @@ class ProductController extends Controller
         $result = $this->productService->update($product, $request);
 
         if ($result) {
-            return redirect()->route('products.index')->with('success','update success');
+            return redirect()->route('products.index')->with('success', 'update success');
         }
 
-        return redirect()->route('products.index')->with('error','update failed');
+        return redirect()->route('products.index')->with('error', 'update failed');
+    }
+
+
+    public function create()
+    {
+        return view('products.create');
+    }
+
+    public function store(CreateRequest $createRequest) 
+    {
+        $request = $createRequest->validated();
+        $result = $this->productService->create($request);
+
+        if($result) {
+            return redirect()->route('products.index')->with('success', 'create success!');
+        }
+
+        return redirect()->route('products.index')->with('error', 'create failed!');
+    }
+
+    public function destroy(Product $product)
+    {
+        $result = $product->delete();
+
+        if($result) {
+            return redirect()->route('products.index')->with('success', 'delete success!');
+        }
+
+        return redirect()->route('products.index')->with('error', 'delete failed!');
     }
 }
