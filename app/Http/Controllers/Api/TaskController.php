@@ -9,6 +9,7 @@ use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use App\Services\TaskService;
 use Illuminate\Http\Request;
+use App\Http\Requests\Api\Task\UpdateRequest;
 
 class TaskController extends Controller
 {
@@ -20,9 +21,7 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        $result = $this->taskService->getList();
-
-        return TaskResource::apiPaginate($result, $request);
+        return $this->taskService->all();
     }
 
     public function store(CreateRequest $createRequest)
@@ -44,29 +43,18 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
-    public function update(UpdateRequest $updateRequest, Task $task)
-    {
-        $request = $updateRequest->validated();
-
-        $result = $this->taskService->update($task, $request);
-
-        if ($result) {
-            // return response()->api_success('update success', true);
-
-            return response()->json([
-                'message' => 'update success'
-            ], 200);
+    public function update(int $id, UpdateRequest $task) {
+        $updated = $this->taskService->update($id, $task->all());
+        if (!$updated) {
+            return response(status: 404);
         }
-
-        return response()->api_error('update error');
+        return response(status: 200);
     }
 
-    public function destroy(Task $task)
-    {
-        $task->delete();
-
-        return response()->json([
-            'message' => 'delete success'
-        ], 200);
+    public function delete(int $id) {
+        $deleted = $this->taskService->remove($id);
+        if ($deleted != NULL)
+            return response(status: 200);
+        return response(status: 404);
     }
 }

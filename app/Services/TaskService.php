@@ -27,19 +27,24 @@ class TaskService {
         }
     }
 
-    public function update($task, $params)
-    {
-        try {
-            return $task->update($params);
-        } catch (Exception $exception) {
-            Log::error($exception);
-
-            return false;
-        }
+    public function all() {
+        $result = Task::all();
+        return $result;
     }
 
-    public function getList()
-    {
-        return $this->model->orderBy('id','desc');
+    public function update(int $id, $params) : bool {
+        $task = $this->model->find($id);
+        if ($task == null)
+            return false;
+        $task->update($params);
+        return true;
+    }
+
+    public function remove(int $id) {
+        $model = $this->model->find($id);
+        if ($model != NULL) {
+            $model->delete();
+        }
+        return $model;
     }
 }
