@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Product;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class ProductService
 {
@@ -20,5 +22,14 @@ class ProductService
     public function update($product, $params)
     {
         return $product->update($params);
+    }
+    public function createProduct(array $data)
+    {
+        try {
+            return $this->product->create($data);
+        } catch (Exception $exception) {
+            Log::error($exception);
+            return false;
+        }
     }
 }

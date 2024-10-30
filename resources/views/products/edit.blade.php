@@ -56,4 +56,7 @@
     .btn-primary:hover {
         background-color: #0056b3;
     }
+    h1{
+        text-align: center;
+    }
 </style>

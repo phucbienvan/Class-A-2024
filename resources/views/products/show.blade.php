@@ -1,43 +1,38 @@
 
-<h2>Product</h2>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<h2>Product Details</h2>
 
 
-<table class="product-table">
-    <thead>
-        <tr>
-            <th class="product-header">Name</th>
-            <th class="product-header">Description</th>
-            <th class="product-header">Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="product-row">
-            <td class="product-cell">{{ $product->name }}</td>
-            <td class="product-cell">{{ $product->description }}</td>
-            <td class="product-cell">{{ $product->price }}</td>
-        </tr>
-    </tbody>
-</table>
+<form class="container mt-4 p-4 border rounded bg-light">
+    <div class="form-group row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Name:</label>
+        <div class="col-sm-9">
+            <p class="form-control-plaintext">{{ $product->name }}</p>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Description:</label>
+        <div class="col-sm-9">
+            <p class="form-control-plaintext">{{ $product->description }}</p>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Price:</label>
+        <div class="col-sm-9">
+            <p class="form-control-plaintext">{{ $product->price }}</p>
+        </div>
+    </div>
+</form>
+
+
 
 
 <style>
-    .product-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
+    .container {
+        max-width: 500px;
     }
-    .product-header {
-        background-color: #f2f2f2;
-        font-weight: bold;
-        text-align: left;
-        padding: 10px;
-        border-bottom: 2px solid #ddd;
-    }
-    .product-row:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-    .product-cell {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
+    h2{
+        text-align: center;
     }
 </style>
