@@ -8,6 +8,7 @@
 @endif
 
 <table class="product-table">
+<a href="{{ route('products.create') }}">Create</a>
     <thead>
         <tr>
             <th class="product-header">Name</th>
@@ -24,6 +25,7 @@
                 <td class="product-cell">{{ $item->price }}</td>
                 <td class="product-cell">
                     <a href="{{ route('products.edit', $item->id) }}">Update</a>
+                    <a href="{{ route('products.show', $item->id) }}">Detail</a>
                 </td>
             </tr>
         @endforeach 

@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Http\Requests\Api\Task;
-
+namespace App\Http\Requests\Web\Product;
 use Illuminate\Foundation\Http\FormRequest;
-
 class CreateRequest extends FormRequest
 {
     /**
@@ -15,7 +13,6 @@ class CreateRequest extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,15 +21,15 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => ['required', 'max:255'],
-            "description" => "required"
+            'name' => ['required','string', 'max:255'],
+            'description' => ['required','string'],
+            'price'=> ['required', 'integer'],
         ];
     }
-
     public function messages()
     {
         return [
-            'name.required' => 'hãy nhập name'
+            'name.required' => 'Lỗi nè bạn'
         ];
     }
 }

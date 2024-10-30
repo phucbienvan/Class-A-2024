@@ -15,10 +15,16 @@ class ProductService
     public function getList()
     {
         return $this->product->where('price', '>', 50)->get();
+        return $this->product->get();
     }
 
     public function update($product, $params)
     {
         return $product->update($params);
+    }
+
+    public function create($params)
+    {
+        return $this->product->create($params);
     }
 }
