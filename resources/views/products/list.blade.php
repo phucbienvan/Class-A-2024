@@ -9,7 +9,12 @@
 @if (Session::has('error'))
     <p>{{ Session::get('error') }}</p>
 @endif
-<a href="{{ route('products.create') }}" class="btn btn-success"> Thêm mới </a>
+<form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button type="submit">Logout</button>
+</form>
+<a href="{{ route('products.create') }}" class="btn btn-success"> Add product </a>
+
 <p></p>
 <table class="table table-dark table-striped">
     <thead>

@@ -29,10 +29,7 @@ class TaskController extends Controller
     {  
         $request = $createRequest->validated();
         $result = $this->taskService->create($request);
-        $result = false;
-
         if ($result) {
-            // return response()->api_success('create success', $result);
             return response()->api_success('created success', $result);
         }
 
