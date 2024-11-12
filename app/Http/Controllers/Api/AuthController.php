@@ -42,4 +42,13 @@ class AuthController extends Controller
 
         return response()->api_error('Login error', $result['message']);
     }
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Logout successful',
+        ]);
+    }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Web\Auth;
 
 use App\Http\Requests\Api\BaseRequest;
-use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends BaseRequest
 {

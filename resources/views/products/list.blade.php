@@ -8,7 +8,10 @@
 @endif
 
 <a href="{{ route('products.create') }}" class="create-button">Create Product</a>
-
+<form action="{{ route('logout') }}" method="POST">
+@csrf
+    <button type="submit" class="btn btn-primary">Logout</button>
+</form>
 <table class="product-table">
     <thead>
         <tr>
