@@ -23,10 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', action: [AuthController::class, 'register']);
 Route::post('login', action: [AuthController::class, 'login']);
 
-Route::group(['prefix'=>'tasks','as'=>'tasks.', 'middleware' => 'auth:sanctum'], function() {
-    Route::get('/', [TaskController::class, 'index']);
-    Route::post('/', [TaskController::class, 'store']);
-    Route::get('/{task}', [TaskController::class, 'show'])->withTrashed();
-    Route::put('/{task}', [TaskController::class, 'update']);
-    Route::delete('/{task}', [TaskController::class, 'destroy']);
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::post('logout', action: [AuthController::class, 'logout']);
+
+    Route::group(['prefix'=>'tasks','as'=>'tasks.'], function() {
+        Route::get('/', [TaskController::class, 'index']);
+        Route::post('/', [TaskController::class, 'store']);
+        Route::get('/{task}', [TaskController::class, 'show'])->withTrashed();
+        Route::put('/{task}', [TaskController::class, 'update']);
+        Route::delete('/{task}', [TaskController::class, 'destroy']);
+    });
 });
