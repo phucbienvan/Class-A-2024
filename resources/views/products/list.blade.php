@@ -1,4 +1,13 @@
 <h1>Products</h1>
+
+<div class="header-actions">
+    <a href="{{ route('products.create') }}" class="create-button">Create Product</a>
+    <form method="POST" action="{{ route('logout') }}" class="logout-form">
+        @csrf
+        <button type="submit" class="logout-button">Logout</button>
+    </form>
+</div>
+
 @if (Session::has('success'))
     <p class="success-message">{{ Session::get('success') }}</p>
 @endif
@@ -6,8 +15,6 @@
 @if (Session::has('error'))
     <p>{{ Session::get('error') }}</p>
 @endif
-
-<a href="{{ route('products.create') }}" class="create-button">Create Product</a>
 
 <table class="product-table">
     <thead>
@@ -68,5 +75,28 @@
     }
     .create-button:hover {
         background-color: #218838;
+    }
+    .header-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .logout-button {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .logout-button:hover {
+        background-color: #c82333;
+    }
+
+    .logout-form {
+        display: inline;
     }
 </style>

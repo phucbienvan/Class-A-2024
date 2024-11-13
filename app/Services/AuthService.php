@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -45,5 +46,17 @@ class AuthService {
             'access_token' => $token,
             'name' => $user->name,
         ];
+    }
+
+    public function logoutApi()
+    {
+        return auth()->user()->tokens()->delete();
+    }
+
+    public function logoutWeb()
+    {
+        Auth::logout();
+
+        return true;
     }
 }
