@@ -5,6 +5,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Auth;
 
 class AuthService {
     protected $user;
@@ -46,4 +47,31 @@ class AuthService {
             'name' => $user->name,
         ];
     }
+
+    public function logout()
+    {
+        try {
+            $user = auth()->user();
+            
+            if ($user) {
+                $user->currentAccessToken()->delete(); 
+                return [
+                    'status' => true,
+                    'message' => 'Logout successful',
+                ];
+            }
+
+            return [
+                'status' => false,
+                'message' => 'No user logged in',
+            ];
+        } catch (Exception $e) {
+            Log::error($e);
+            return [
+                'status' => false,
+                'message' => 'Logout failed',
+            ];
+        }
+    }
+    
 }

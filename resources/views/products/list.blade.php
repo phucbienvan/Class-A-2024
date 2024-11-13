@@ -8,6 +8,10 @@
 @endif
 
 <a href="{{ route('products.create') }}" class="create-button">Create Product</a>
+<div class="user-logout">
+    <span class="user-name">{{ Auth::user()->name }}</span>
+    <a href="{{ route('logout') }}" class="logout-button">Logout</a>
+</div>
 
 <table class="product-table">
     <thead>
@@ -38,6 +42,31 @@
 
 
 <style>
+    .user-logout {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .user-name {
+        margin-right: 15px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .logout-button {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .logout-button:hover {
+        background-color: #c82333;
+    }
     .product-table {
         width: 100%;
         border-collapse: collapse;
