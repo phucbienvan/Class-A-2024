@@ -42,4 +42,11 @@ class AuthController extends Controller
 
         return response()->api_error('Login error', $result['message']);
     }
+
+    public function logout(Request $request)
+    {
+        $this->authService->apiLogout($request->user());
+
+        return response()->api_success('Logout success');
+    }
 }
