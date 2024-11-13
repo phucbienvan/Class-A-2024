@@ -1,12 +1,15 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
-class AuthService {
+class AuthService
+{
     protected $user;
 
     public function __construct(User $user)
@@ -16,7 +19,7 @@ class AuthService {
 
     public function register($params)
     {
-        try {            
+        try {
             return $this->user->create($params);
         } catch (Exception $e) {
             Log::error($e);
@@ -45,5 +48,21 @@ class AuthService {
             'access_token' => $token,
             'name' => $user->name,
         ];
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return true;
+    }
+
+    public function apiLogout($user)
+    {
+        $user->currentAccessToken()->delete();
+
+        return true;
     }
 }
