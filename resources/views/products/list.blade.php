@@ -7,7 +7,13 @@
     <p>{{ Session::get('error') }}</p>
 @endif
 
-<a href="{{ route('products.create') }}" class="create-button">Create Product</a>
+<div class="flex">
+    <a href="{{ route('products.create') }}" class="create-button">Create Product</a>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="logut_button">Logout</button>
+    </form>
+</div>
 
 <table class="product-table">
     <thead>
@@ -38,6 +44,12 @@
 
 
 <style>
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
     .product-table {
         width: 100%;
         border-collapse: collapse;
@@ -65,6 +77,17 @@
         text-decoration: none;
         border-radius: 4px;
         margin-bottom: 20px;
+    }
+    .logut_button {
+        display: inline-block;
+        background-color: dodgerblue;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        border: none;
+        cursor: pointer;
     }
     .create-button:hover {
         background-color: #218838;
