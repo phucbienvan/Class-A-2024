@@ -9,6 +9,12 @@
 
 </head>
 <body>
+    <header>
+        <form action="{{ route('logout') }}" method='POST'>
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    </header>
     <div class="wrapper">
         <div class="main_content">
             <div class="title-and-actions">
