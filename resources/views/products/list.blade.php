@@ -7,6 +7,7 @@
     <p>{{ Session::get('error') }}</p>
 @endif
 
+<a href="{{ route('logout') }}">Logout</a>
 <a href="{{ route('products.create') }}" class="create-button">Create Product</a>
 
 <table class="product-table">
