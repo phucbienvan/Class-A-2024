@@ -24,4 +24,9 @@ class AuthController extends Controller
 
         return redirect()->route('form_login')->withErrors(['email' => 'Invalid credentials']);
     }
+	
+	public function logout() {
+		Auth::logout();
+		return redirect()->route('form_login');
+	}
 }
