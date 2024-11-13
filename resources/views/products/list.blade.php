@@ -7,6 +7,11 @@
     <p>{{ Session::get('error') }}</p>
 @endif
 
+<form action="{{ route('logout') }}" method="POST" style="display: inline;">
+    @csrf
+    <button type="submit" class="btn btn-danger">Logout</button>
+</form>
+
 <a href="{{ route('products.create') }}" class="create-button">Create Product</a>
 
 <table class="product-table">
