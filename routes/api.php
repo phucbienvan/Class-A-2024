@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register', action: [AuthController::class, 'register']);
 Route::post('login', action: [AuthController::class, 'login']);
+Route::post('logout', action: [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::group(['prefix'=>'tasks','as'=>'tasks.', 'middleware' => 'auth:sanctum'], function() {
     Route::get('/', [TaskController::class, 'index']);

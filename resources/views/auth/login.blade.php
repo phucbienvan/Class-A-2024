@@ -3,8 +3,34 @@
 <head>
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .success-message {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            text-transform: capitalize;
+            color: white;
+            padding: 1em;
+            display: inline-block;
+            min-width: 20em;
+            border-radius: 0.2em;
+            background: mediumseagreen;
+            animation: alert 1s 1s forwards;
+        }
+        @keyframes alert {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+    </style>
 </head>
 <body>
+    @if (Session::has('logout_success'))
+        <p class="success-message">{{ Session::get('logout_success') }}</p>
+    @endif
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
