@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\Product\CreateRequest;
 use App\Http\Requests\Web\Product\UpdateRequest;
 use App\Models\Product;
 use App\Services\ProductService;
@@ -44,5 +45,22 @@ class ProductController extends Controller
         }
 
         return redirect()->route('products.index')->with('error','update failed');
+    }
+
+    public function create()
+    {
+        return view('products.create');
+    }
+
+    public function store(CreateRequest $createRequest)
+    {
+        $params = $createRequest->validated();
+        $result =  $this->productService->store($params);
+
+        if ($result) {
+            return redirect()->route('products.index')->with('success','Create product success');
+        }
+
+        return redirect()->route('products.index')->with('error','Create product fail');
     }
 }

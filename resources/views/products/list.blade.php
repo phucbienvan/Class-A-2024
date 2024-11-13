@@ -7,6 +7,8 @@
     <p>{{ Session::get('error') }}</p>
 @endif
 
+<a href="{{ route('products.create') }}" class="create-button">Create Product</a>
+
 <table class="product-table">
     <thead>
         <tr>
@@ -19,7 +21,11 @@
     <tbody>
         @foreach ($items as $item)
             <tr class="product-row">
-                <td class="product-cell">{{ $item->name }}</td>
+                <td class="product-cell">
+                    <a href="{{ route('products.show', $item->id) }}">
+                        {{ $item->name }}
+                    </a>
+                </td>
                 <td class="product-cell">{{ $item->description }}</td>
                 <td class="product-cell">{{ $item->price }}</td>
                 <td class="product-cell">
@@ -50,5 +56,17 @@
     .product-cell {
         padding: 10px;
         border-bottom: 1px solid #ddd;
+    }
+    .create-button {
+        display: inline-block;
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+    .create-button:hover {
+        background-color: #218838;
     }
 </style>
